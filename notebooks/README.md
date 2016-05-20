@@ -6,40 +6,127 @@ The links below are to static renderings of the notebooks via
 Descriptions below the links are from the first cell of the notebooks
 (if that cell contains Markdown or raw text).
 
-* ##[3apr15_nowcast_neg_sal.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/3apr15_nowcast_neg_sal.ipynb)  
+* ##[Check River Files.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Check River Files.ipynb)  
+    
+    **Check River Flows**  
+
+* ##[3apr15_nowcast_neg_sal.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/3apr15_nowcast_neg_sal.ipynb)  
     
     Notebook to investigate the negative salinity error that occurred in the 3 April 2015 Nowcast  
 
-* ##[CompareTwo.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/CompareTwo.ipynb)  
+* ##[TidalEvaluationTake2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TidalEvaluationTake2.ipynb)  
+    
+    This notebook will load data, perform a tidal analyis, compare with observations, plot the results, and save the analysis in a spreadsheet.  Eight Tidal Constituents: M2, K1, O1, S2, P1, N2, Q1 and K2 are considered.  
+    - Links consistuents that cannot be separated over 40 days  
+    - Corrects nodal calculations  
+
+* ##[AnalyzeApril2016Drifters.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/AnalyzeApril2016Drifters.ipynb)  
+    
+    **Notebook to Analyze April 2016 Drift Tracks**  
+
+* ##[SMELTresults.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/SMELTresults.ipynb)  
+    
+    **Notebook to Look at SMELT results **  
+
+
+* ##[CompareTwo.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/CompareTwo.ipynb)  
     
     Susan's workhorse notebook for looking at a variety of fields at two different times.  
 
-* ##[WeatherCheck.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/WeatherCheck.ipynb)  
+* ##[WeatherCheck.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/WeatherCheck.ipynb)  
     
     Notebook to look at one day of Data from Kao-Shen...     
     * check wind  
 
-* ##[Rain_Check.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/Rain_Check.ipynb)  
+* ##[Restart vs Cold Start.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Restart vs Cold Start.ipynb)  
     
-* ##[ORCAOfflineDynamicsFiles.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/ORCAOfflineDynamicsFiles.ipynb)  
+* ##[TidalEvaluation.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TidalEvaluation.ipynb)  
+    
+    This notebook will load data, perform a tidal analyis, compare with observations, plot the results, and save the analysis in a spreadsheet.  Eight Tidal Constituents: M2, K1, O1, S2, P1, N2, Q1 and K2 are considered.  
+
+* ##[ArianeAnalysisSouthFluxes.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ArianeAnalysisSouthFluxes.ipynb)  
+    
+    **Series of Plots to Analyze Long Ariane Timeseries: Forward South**  
+
+* ##[Explore_NC_Output_Files.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Explore_NC_Output_Files.ipynb)  
+    
+    Notebook to look at New NEMO 3.6 Tidal Runs  
+
+* ##[Scratch.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Scratch.ipynb)  
+    
+* ##[Boundary_Pass_Flux.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Boundary_Pass_Flux.ipynb)  
+    
+    Look at time-averaged fluxes through Boundary Pass  
+    To start, use ncra (on Salish) to average the files over 40 days  
+
+* ##[Rain_Check.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Rain_Check.ipynb)  
+    
+* ##[ORCAOfflineDynamicsFiles.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ORCAOfflineDynamicsFiles.ipynb)  
     
     Look at offline file requirements  
 
-* ##[Find Tides.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/Find Tides.ipynb)  
+* ##[River Strength.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/River Strength.ipynb)  
+    
+    **Rank River Flows**  
+
+* ##[Find Tides.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Find Tides.ipynb)  
     
     Notebook to find the tide state for a given date.  
 
-* ##[SusansViewerWQuiver.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/SusansViewerWQuiver.ipynb)  
+* ##[SSHforDFO.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/SSHforDFO.ipynb)  
     
-* ##[tides.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/tides.ipynb)  
-    
-* ##[Explore_NC_Output_Files.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis/raw/tip/Susan/Explore_NC_Output_Files.ipynb)
+    Assemble one month (Nov 2015) SSH for DFO  
 
-  Notebook to look at New NEMO 3.6 Tidal Runs
+* ##[ArianeAnalysisSouthBackFluxes.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ArianeAnalysisSouthBackFluxes.ipynb)  
+    
+    **Series of Plots to Analyze Long Ariane Timeseries: Backward South**  
+
+* ##[Restart File Investigator.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Restart File Investigator.ipynb)  
+    
+    **Investigate a Restart File**  
+
+* ##[Thalwegs Dec.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Thalwegs Dec.ipynb)  
+    
+* ##[LookatBase2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/LookatBase2.ipynb)  
+    
+    Notebook to Investigate Base Run's Baroclinic Properties  
+
+* ##[Vertical Resolution.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Vertical Resolution.ipynb)  
+    
+    Can we use the same number of vertical points, give up some resolution from 15 - 25 m to increase our resolution below to 250 m?  Our current resolution:  
+
+* ##[Forecast14Jan16.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Forecast14Jan16.ipynb)  
+    
+    Notebook to show forecast of plume for Sam Kastner  
+
+* ##[CheckRiverClimatology.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/CheckRiverClimatology.ipynb)  
+    
+    **Check River Climatology**  
+
+* ##[Victoria Phase and Amplitude.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Victoria Phase and Amplitude.ipynb)  
+    
+* ##[SusansViewerWQuiver.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/SusansViewerWQuiver.ipynb)  
+    
+* ##[tides.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/tides.ipynb)  
+    
+* ##[TideTuning.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TideTuning.ipynb)  
+    
+    **Tide Tuning Notebook ****  
+
+* ##[BottomFrictionParameterization.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/BottomFrictionParameterization.ipynb)  
+    
+* ##[ArianeAnalysis.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ArianeAnalysis.ipynb)  
+    
+    **Series of Plots to Analyze Long Ariane Timeseries: Forward North**  
+
+* ##[ArianeAnalysisBackFlux.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ArianeAnalysisBackFlux.ipynb)  
+    
+    **Series of Plots to Analyze Long Ariane Timeseries: Backward North**  
+
 
 ##License
 
-These notebooks and files are copyright 2013-2015
+These notebooks and files are copyright 2013-2016
 by the Salish Sea MEOPAR Project Contributors
 and The University of British Columbia.
 
