@@ -22,9 +22,9 @@ import os
 import re
 
 
-nbviewer = 'http://nbviewer.ipython.org/urls'
-repo = 'bitbucket.org/salishsea/analysis/raw/tip'
-repo_dir = 'Susan'
+nbviewer = 'http://nbviewer.jupyter.org/urls'
+repo = 'bitbucket.org/salishsea/analysis-susan/raw/tip'
+repo_dir = 'notebooks'
 url = os.path.join(nbviewer, repo, repo_dir)
 title_pattern = re.compile('#{1,6} ?')
 readme = """The IPython Notebooks in this directory are made by Susan for
@@ -41,9 +41,13 @@ for fn in notebooks:
     readme += '* ##[{fn}]({url}/{fn})  \n    \n'.format(fn=fn, url=url)
     with open(fn, 'rt') as notebook:
         contents = json.load(notebook)
-    first_cell_type = contents['worksheets'][0]['cells'][0]['cell_type']
+    try:
+        first_cell = contents['worksheets'][0]['cells'][0]
+    except KeyError:
+        first_cell = contents['cells'][0]
+    first_cell_type = first_cell['cell_type']
     if first_cell_type in 'markdown raw'.split():
-        desc_lines = contents['worksheets'][0]['cells'][0]['source']
+        desc_lines = first_cell['source']
         for line in desc_lines:
             suffix = ''
             if title_pattern.match(line):
