@@ -24,10 +24,20 @@ Descriptions below the links are from the first cell of the notebooks
     
     **Notebook to Analyze April 2016 Drift Tracks**  
 
+* ##[FixO2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/FixO2.ipynb)  
+    
+    **Reset oxygen to 180 in restart file**  
+
 * ##[SMELTresults.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/SMELTresults.ipynb)  
     
     **Notebook to Look at SMELT results **  
 
+
+* ##[ComparisonWithJetty.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ComparisonWithJetty.ipynb)  
+    
+    **Compare Frictional Jetty to No Jetty**  
+    Other difference is light (biological in the base case, not in the jetty case)    
+    Ran two days, compare the second  
 
 * ##[CompareTwo.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/CompareTwo.ipynb)  
     
