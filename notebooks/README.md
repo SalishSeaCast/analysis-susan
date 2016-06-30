@@ -14,6 +14,18 @@ Descriptions below the links are from the first cell of the notebooks
     
     Notebook to investigate the negative salinity error that occurred in the 3 April 2015 Nowcast  
 
+* ##[TransportSummary.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TransportSummary.ipynb)  
+    
+* ##[EvaluateOrlanskiOnSMELT.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/EvaluateOrlanskiOnSMELT.ipynb)  
+    
+    **Notebook to look at Effect of New Boundary Conditions on the Biology ****  
+      
+    Plots are: from rest with T, S and biology from Apr 24.  Run for almost two days.  Compare at local noon on the second day.  
+      
+    left plots: current nowcast bathymetry (downbyone) and boundary conditions (convection for baroclinic velocity)  
+    centre plots: new bathymetry (downbyone2) and current boundary conditions (convection for baroclinic velocity)  
+    right plots: new bathymetry (downbyone2) and orlanksi radiation boundary conditions  
+
 * ##[TidalEvaluationTake2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TidalEvaluationTake2.ipynb)  
     
     This notebook will load data, perform a tidal analyis, compare with observations, plot the results, and save the analysis in a spreadsheet.  Eight Tidal Constituents: M2, K1, O1, S2, P1, N2, Q1 and K2 are considered.  
@@ -26,7 +38,7 @@ Descriptions below the links are from the first cell of the notebooks
 
 * ##[FixO2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/FixO2.ipynb)  
     
-    **Reset oxygen to 180 in restart file**  
+    **Reset oxygen to 180 in restart file and Nitrate to 30.45**  
 
 * ##[SMELTresults.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/SMELTresults.ipynb)  
     
@@ -43,6 +55,10 @@ Descriptions below the links are from the first cell of the notebooks
     
     Susan's workhorse notebook for looking at a variety of fields at two different times.  
 
+* ##[ForcingTimeSeries.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/ForcingTimeSeries.ipynb)  
+    
+    Collect and Process the Comparison DataSets  
+
 * ##[WeatherCheck.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/WeatherCheck.ipynb)  
     
     Notebook to look at one day of Data from Kao-Shen...     
@@ -50,6 +66,10 @@ Descriptions below the links are from the first cell of the notebooks
 
 * ##[Restart vs Cold Start.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Restart vs Cold Start.ipynb)  
     
+* ##[AnalyzeTransport.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/AnalyzeTransport.ipynb)  
+    
+    **Analyze Ariane Deduced Tranports**  
+
 * ##[TidalEvaluation.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/TidalEvaluation.ipynb)  
     
     This notebook will load data, perform a tidal analyis, compare with observations, plot the results, and save the analysis in a spreadsheet.  Eight Tidal Constituents: M2, K1, O1, S2, P1, N2, Q1 and K2 are considered.  
@@ -64,6 +84,10 @@ Descriptions below the links are from the first cell of the notebooks
 
 * ##[Scratch.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Scratch.ipynb)  
     
+* ##[OpenBoundaryAnalysis.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/OpenBoundaryAnalysis.ipynb)  
+    
+    Look at Orlanski Boundaries - NPO  
+
 * ##[Boundary_Pass_Flux.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-susan/raw/tip/notebooks/Boundary_Pass_Flux.ipynb)  
     
     Look at time-averaged fluxes through Boundary Pass  
