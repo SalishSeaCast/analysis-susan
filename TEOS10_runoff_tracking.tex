@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage[top=2.1cm, bottom=2.1cm, left=1cm, right=1cm]{geometry}
+
+\begin{document}
+
+\section*{Runoffs}
+
+ \subsection*{sbcrnf.F90}
+
+From sbc\_rnf, read the runoff temperature into sf\_t\_rnf:
+\begin{verbatim}
+IF(   ln_rnf_tem   )   CALL fld_read ( kt, nn_fsbc, sf_t_rnf )    ! idem for runoffs temperature if required
+\end{verbatim}
+
+Set the ``heat''=t*waterflux added into rnf\_tsc:
+\begin{verbatim}
+IF( ln_rnf_tem ) THEN                                       ! use runoffs temperature data
+            rnf_tsc(:,:,jp_tem) = ( sf_t_rnf(1)%fnow(:,:,1) ) * rnf(:,:) * r1_rau0
+\end{verbatim}
+
+\subsection*{trasbc}
+Add the ``heat'' to the temperature trend and distribute it in depth according to h\_rnh
+\begin{verbatim}
+tsa(ji,jj,jk,jp_tem) = tsa(ji,jj,jk,jp_tem)   &
+               & +  ( rnf_tsc_b(ji,jj,jp_tem) + rnf_tsc(ji,jj,jp_tem) ) * zdep
+\end{verbatim}
+
+\subsection*{tranxt}
+Include in the Asselin filter.
+
+\section*{Sensible/LW Heat Flux}
+
+\subsection*{sbcssm.F90}
+
+In sbc\_oce, sst\_m is calculated from tsn using eos\_pt\_from\_ct if necessary:
+\begin{verbatim}
+zts(ji,jj,jp_tem) = tsn(ji,jj,mikt(ji,jj),jp_tem)
+...
+IF( ln_useCT )  THEN    ;   sst_m(:,:) = eos_pt_from_ct( zts(:,:,jp_tem), zts(:,:,jp_sal) )
+\end{verbatim}
+
+\subsection*{sbcblk\_core.F90}
+Then this sst\_m passed through sbc\_blk\_core as pst and used in blk\_oce\_core to calculate qns e.g.
+\begin{verbatim}
+zst(:,:) = pst(:,:) + rt0      ! convert SST from Celcius to Kelvin (and set minimum value far above 0 K)
+...
+zqlw(:,:) = (sf(jp_qlw)%fnow(:,:,1) - Stef * zst(:,:)*zst(:,:)*zst(:,:)*zst(:,:)  ) * tmask(:,:,1) ! Long  Wave
+\end{verbatim}
+
+So, river runoffs need to be in Conservative Temperature.
+
+\end{document}
+
