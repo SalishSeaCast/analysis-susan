@@ -18,7 +18,8 @@ def get_model_salinity(filenames):
     return threemonthsbase_sal, converted_timesbase
 
 
-def get_pairs(istart, iend, ferry_times, ferry, modelfile, ferryfile, accfile, jmodel, imodel, dlon, dlat, slon, slat,
+def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross,
+              modelfile, ferryfile, accfile, jmodel, imodel, dlon, dlat, slon, slat,
               threemonthsbase_sal, converted_timesbase):
     list_of_modelbase_sals = np.array([])
     list_of_ferrybase_sals = np.array([])
@@ -27,14 +28,10 @@ def get_pairs(istart, iend, ferry_times, ferry, modelfile, ferryfile, accfile, j
     list_of_times = np.array([])
     list_of_crossing = np.array([])
     for n in range(istart, iend):
-        print ('start')
         date = ferry_times[n]
-        if ((ferry.variables['s.latitude'][n].mask == False)
-                 and (ferry.variables['s.salinity'][n].mask == False)):
-            print ('switch')
-            Xind, Yind = find_point(ferry.variables['s.longitude'][n], ferry.variables['s.latitude'][n],
+        if not ferry_lats.mask[n] and not ferry_sals.mask[n]:
+            Xind, Yind = find_point(ferry_lons[n], ferry_lats[n],
                                     jmodel, imodel, dlon, dlat, slon, slat)
-            print ('find')
 
             if date.minute <= 30:
                 before = datetime.datetime(year = date.year, month = date.month, day = date.day,
@@ -50,13 +47,11 @@ def get_pairs(istart, iend, ferry_times, ferry, modelfile, ferryfile, accfile, j
                 delta = (date - before).seconds / 3600
                 s_val = ((delta * (threemonthsbase_sal[index, Yind, Xind])) +
                          (1- delta)*(threemonthsbase_sal[index+1, Yind, Xind]))
-            print('calculate')
-            list_of_ferrybase_sals = np.append(list_of_ferrybase_sals, ferry.variables['s.salinity'][n])
+            list_of_ferrybase_sals = np.append(list_of_ferrybase_sals, ferry_sals[n])
             list_of_modelbase_sals = np.append(list_of_modelbase_sals, s_val)
-            list_of_lats = np.append(list_of_lats, ferry.variables['s.latitude'][n])
-            list_of_lons = np.append(list_of_lons, ferry.variables['s.longitude'][n])
-            list_of_crossing = np.append(list_of_crossing, ferry.variables['s.crossing_number'][n])
-            print(n)
+            list_of_lats = np.append(list_of_lats, ferry_lats[n])
+            list_of_lons = np.append(list_of_lons, ferry_lons[n])
+            list_of_crossing = np.append(list_of_crossing, ferry_cross[n])
         if n % 1000 == 0:
             np.savetxt(modelfile, list_of_modelbase_sals)
             np.savetxt(ferryfile, list_of_ferrybase_sals)
@@ -71,11 +66,16 @@ def get_pairs(istart, iend, ferry_times, ferry, modelfile, ferryfile, accfile, j
 
 def get_ferry(istart, iend):
     ferry_data = 'https://salishsea.eos.ubc.ca/erddap/tabledap/ubcONCTWDP1mV18-01'
+#    import ipdb; ipdb.set_trace()
     ferry = nc.Dataset(ferry_data)
     unit = ferry.variables['s.time'].units
     ferry_times = nc.num2date(ferry.variables['s.time'][:], unit)
+    ferry_lats = ferry.variables['s.latitude'][:]
+    ferry_lons = ferry.variables['s.longitude'][:]
+    ferry_sals = ferry.variables['s.salinity'][:]
+    ferry_cross = ferry.variables['s.crossing_number'][:]
     print ("Start and End Times", ferry_times[istart], ferry_times[iend])
-    return ferry, ferry_times, unit
+    return ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross
 
 
 def init_find_point():
@@ -99,9 +99,9 @@ def find_point(alon, alat, jmodel, imodel, dlon, dlat, slon, slat):
 
 def main(args):
     jmodel, imodel, dlon, dlat, slon, slat = init_find_point()
-    ferry, ferry_times, unit = get_ferry(int(args.istart), int(args.iend))
+    ferry_times,ferry_lons, ferry_lats, ferry_sals, ferry_cross  = get_ferry(int(args.istart), int(args.iend))
     threemonthsal, converted_timesbase = get_model_salinity(args.datafile)
-    get_pairs(int(args.istart), int(args.iend), ferry_times, ferry,
+    get_pairs(int(args.istart), int(args.iend), ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross,
               args.modelfile, args.ferryfile, args.accfile, jmodel, imodel, dlon, dlat, slon, slat,
               threemonthsal, converted_timesbase)
     print ('Done')
