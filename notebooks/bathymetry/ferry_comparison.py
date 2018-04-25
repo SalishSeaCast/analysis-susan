@@ -1,6 +1,7 @@
 import argparse
 import netCDF4 as nc
 import numpy as np
+import pandas as pd
 from salishsea_tools import geo_tools, nc_tools, tidetools
 import xarray as xr
 import glob
@@ -51,15 +52,20 @@ def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals, fer
             list_of_modelbase_sals = np.append(list_of_modelbase_sals, s_val)
             list_of_lats = np.append(list_of_lats, ferry_lats[n])
             list_of_lons = np.append(list_of_lons, ferry_lons[n])
+            list_of_times = np.append(list_of_times, date)
             list_of_crossing = np.append(list_of_crossing, ferry_cross[n])
         if n % 1000 == 0:
             np.savetxt(modelfile, list_of_modelbase_sals)
             np.savetxt(ferryfile, list_of_ferrybase_sals)
-            np.savetxt(accfile, (list_of_lats, list_of_lons, list_of_crossing))
-            print(ferry_times[n])
-    np.savetxt(modelfile, list_of_modelbase_sals)
-    np.savetxt(ferryfile, list_of_ferrybase_sals)
-    np.savetxt(accfile, (list_of_lats, list_of_lons, list_of_crossing))
+    np.savetxt(accfile, list_of_crossing)
+    dataout = pd.DataFrame({'time': list_of_times,
+                            'lats': list_of_lats,
+                            'lons': list_of_lons,
+                            'ferry': list_of_ferrybase_sals,
+                            'model': list_of_modelbase_sals})
+    dataout.to_csv(f'pandas{modelfile}')
+    dataout = pd.DataFrame({'crossing': list_of_crossing}, dtype='float')
+    dataout.to_csv(f'crossing{modelfile}')
     print(ferry_times[n])
     return
 
