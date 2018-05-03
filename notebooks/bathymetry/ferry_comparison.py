@@ -7,21 +7,22 @@ import xarray as xr
 import glob
 import datetime
 
+
 def get_model_salinity(filenames):
     threemonthsbase = sorted(glob.glob(filenames))
     with nc.Dataset(threemonthsbase[0]) as h:
         model_units = h.variables['time_counter'].units
 
     with nc_tools.scDataset(threemonthsbase) as f:
-        threemonthsbase_sal = f.variables['vosaline'][:,1,...]
+        threemonthsbase_sal = f.variables['vosaline'][:, 1, ...]
         timesbase = f.variables['time_counter'][:]
     converted_timesbase = nc.num2date(timesbase, model_units)
     return threemonthsbase_sal, converted_timesbase
 
 
-def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross,
-              modelfile, ferryfile, accfile, jmodel, imodel, dlon, dlat, slon, slat,
-              threemonthsbase_sal, converted_timesbase):
+def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals,
+              ferry_cross, modelfile, ferryfile, accfile, jmodel, imodel, dlon,
+              dlat, slon, slat, threemonthsbase_sal, converted_timesbase):
     list_of_modelbase_sals = np.array([])
     list_of_ferrybase_sals = np.array([])
     list_of_lats = np.array([])
@@ -35,20 +36,24 @@ def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals, fer
                                     jmodel, imodel, dlon, dlat, slon, slat)
 
             if date.minute <= 30:
-                before = datetime.datetime(year = date.year, month = date.month, day = date.day,
-                                           hour = (date.hour), minute = 30) - datetime.timedelta(hours=1)
+                before = (datetime.datetime(year=date.year, month=date.month,
+                          day=date.day, hour=date.hour, minute=30) -
+                          datetime.timedelta(hours=1))
                 index = np.argmin(np.abs(converted_timesbase - date))
                 delta = (date - before).seconds / 3600
                 s_val = ((delta * (threemonthsbase_sal[index-1, Yind, Xind])) +
-                         (1- delta)*(threemonthsbase_sal[index, Yind, Xind]))
+                         (1 - delta)*(threemonthsbase_sal[index, Yind, Xind]))
             elif date.minute > 30:
-                before = datetime.datetime(year = date.year, month = date.month, day = date.day,
-                                           hour = (date.hour), minute = 30)
+                before = datetime.datetime(year=date.year, month=date.month,
+                                           day=date.day, hour=date.hour,
+                                           minute=30)
                 index = np.argmin(np.abs(converted_timesbase - date))
                 delta = (date - before).seconds / 3600
                 s_val = ((delta * (threemonthsbase_sal[index, Yind, Xind])) +
-                         (1- delta)*(threemonthsbase_sal[index+1, Yind, Xind]))
-            list_of_ferrybase_sals = np.append(list_of_ferrybase_sals, ferry_sals[n])
+                         (1 - delta)*(threemonthsbase_sal[index+1,
+                                                          Yind, Xind]))
+            list_of_ferrybase_sals = np.append(
+                list_of_ferrybase_sals, ferry_sals[n])
             list_of_modelbase_sals = np.append(list_of_modelbase_sals, s_val)
             list_of_lats = np.append(list_of_lats, ferry_lats[n])
             list_of_lons = np.append(list_of_lons, ferry_lons[n])
@@ -85,21 +90,26 @@ def get_ferry(istart, iend):
 
 
 def init_find_point():
-    with nc.Dataset('/home/sallen/MEOPAR/sea_initial/bathymetry_201803b.nc') as ds:
-         nav_lat = ds.variables['nav_lat'][:]
-         nav_lon = ds.variables['nav_lon'][:]
+    with nc.Dataset(
+            '/home/sallen/MEOPAR/sea_initial/bathymetry_201803b.nc') as ds:
+        nav_lat = ds.variables['nav_lat'][:]
+        nav_lon = ds.variables['nav_lon'][:]
     jmodel = np.loadtxt('jvalues.txt', dtype=int)
     imodel = np.loadtxt('ivalues.txt', dtype=int)
-    dlon = (nav_lon[imodel[0, -1], jmodel[0, -1]] - nav_lon[imodel[0, 0], jmodel[0, 0]]) / jmodel.shape[1]
-    dlat = (nav_lat[imodel[-1, 0], jmodel[-1, 0]] - nav_lat[imodel[0, 0], jmodel[0, 0]]) / jmodel.shape[0]
-    slat = nav_lat[imodel[0,0], jmodel[0,0]]
-    slon = nav_lon[imodel[0,0], jmodel[0,0]]
+    dlon = (nav_lon[imodel[0, -1], jmodel[0, -1]]
+            - nav_lon[imodel[0, 0], jmodel[0, 0]]) / jmodel.shape[1]
+    dlat = (nav_lat[imodel[-1, 0], jmodel[-1, 0]]
+            - nav_lat[imodel[0, 0], jmodel[0, 0]]) / jmodel.shape[0]
+    slat = nav_lat[imodel[0, 0], jmodel[0, 0]]
+    slon = nav_lon[imodel[0, 0], jmodel[0, 0]]
     return jmodel, imodel, dlon, dlat, slon, slat
 
 
 def find_point(alon, alat, jmodel, imodel, dlon, dlat, slon, slat):
     i = int((alat - slat + 0.5*dlat)/dlat)
     j = int((alon - slon + 0.5*dlon)/dlon)
+    if i >= jmodel.shape[0] or i < 0 or j >= jmodel.shape[1] or j < 0:
+        print("find point beyond array", i, j, alat, alon, jmodel.shape)
     return jmodel[i, j], imodel[i, j]
 
 
@@ -123,4 +133,3 @@ if __name__ == '__main__':
     parser.add_argument('iend', help='last index')
     args = parser.parse_args()
     main(args)
-
