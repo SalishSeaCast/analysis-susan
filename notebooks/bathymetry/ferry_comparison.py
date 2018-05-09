@@ -14,7 +14,7 @@ def get_model_salinity(filenames):
         model_units = h.variables['time_counter'].units
 
     with nc_tools.scDataset(threemonthsbase) as f:
-        threemonthsbase_sal = f.variables['vosaline'][:, 1, ...]
+        threemonthsbase_sal = f.variables['vosaline'][:, 0, ...]
         timesbase = f.variables['time_counter'][:]
     converted_timesbase = nc.num2date(timesbase, model_units)
     return threemonthsbase_sal, converted_timesbase
