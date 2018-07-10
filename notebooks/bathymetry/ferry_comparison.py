@@ -20,7 +20,7 @@ def get_model_salinity(filenames):
     return threemonthsbase_sal, converted_timesbase
 
 
-def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals,
+def get_pairs(ferry_times, ferry_lons, ferry_lats, ferry_sals,
               ferry_cross, modelfile, ferryfile, accfile, jmodel, imodel, dlon,
               dlat, slon, slat, threemonthsbase_sal, converted_timesbase):
     list_of_modelbase_sals = np.array([])
@@ -29,8 +29,10 @@ def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals,
     list_of_lons = np.array([])
     list_of_times = np.array([])
     list_of_crossing = np.array([])
-    for n in range(istart, iend):
+    print (threemonthsbase_sal.shape)
+    for n in range(ferry_times.shape[0]):
         date = ferry_times[n]
+        print (n, date)
         if not ferry_lats.mask[n] and not ferry_sals.mask[n]:
             Xind, Yind = find_point(ferry_lons[n], ferry_lats[n],
                                     jmodel, imodel, dlon, dlat, slon, slat)
@@ -75,17 +77,19 @@ def get_pairs(istart, iend, ferry_times, ferry_lons, ferry_lats, ferry_sals,
     return
 
 
-def get_ferry(istart, iend):
-    ferry_data = 'https://salishsea.eos.ubc.ca/erddap/tabledap/ubcONCTWDP1mV18-01'
+def get_ferry():
+    ferry_data = 'ubcONCTWDP1mV18-01_07mar17-02oct17.nc'
 #    import ipdb; ipdb.set_trace()
     ferry = nc.Dataset(ferry_data)
-    unit = ferry.variables['s.time'].units
-    ferry_times = nc.num2date(ferry.variables['s.time'][:], unit)
-    ferry_lats = ferry.variables['s.latitude'][:]
-    ferry_lons = ferry.variables['s.longitude'][:]
-    ferry_sals = ferry.variables['s.salinity'][:]
-    ferry_cross = ferry.variables['s.crossing_number'][:]
-    print ("Start and End Times", ferry_times[istart], ferry_times[iend])
+    print (ferry)
+    unit = ferry.variables['time'].units
+    ferry_times = nc.num2date(ferry.variables['time'][:], unit)
+    ferry_lats = ferry.variables['latitude'][:]
+    ferry_lons = ferry.variables['longitude'][:]
+    ferry_sals = ferry.variables['salinity'][:]
+    ferry_cross = ferry.variables['crossing_number'][:]
+    print ("Start and End Times", ferry_times[0], ferry_times[-1])
+    print (ferry_times.shape[0])
     return ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross
 
 
@@ -115,9 +119,10 @@ def find_point(alon, alat, jmodel, imodel, dlon, dlat, slon, slat):
 
 def main(args):
     jmodel, imodel, dlon, dlat, slon, slat = init_find_point()
-    ferry_times,ferry_lons, ferry_lats, ferry_sals, ferry_cross  = get_ferry(int(args.istart), int(args.iend))
+    print ('done init find point')
+    ferry_times,ferry_lons, ferry_lats, ferry_sals, ferry_cross  = get_ferry()
     threemonthsal, converted_timesbase = get_model_salinity(args.datafile)
-    get_pairs(int(args.istart), int(args.iend), ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross,
+    get_pairs(ferry_times, ferry_lons, ferry_lats, ferry_sals, ferry_cross,
               args.modelfile, args.ferryfile, args.accfile, jmodel, imodel, dlon, dlat, slon, slat,
               threemonthsal, converted_timesbase)
     print ('Done')
@@ -129,7 +134,5 @@ if __name__ == '__main__':
     parser.add_argument('ferryfile', help='ferry file name')
     parser.add_argument('modelfile', help='model file name')
     parser.add_argument('accfile', help='extra info file name')
-    parser.add_argument('istart', help='first index')
-    parser.add_argument('iend', help='last index')
     args = parser.parse_args()
     main(args)
