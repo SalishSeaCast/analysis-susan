@@ -1,0 +1,46 @@
+# conda environment description file for my general py37
+# development environment
+#
+#
+#   $ conda env create -f py39.yaml
+#   $ conda activate py39
+#
+#   to add a package (when env is activated)
+#   1) add to list below
+#   $ conda env update -f py39.yaml
+#
+#   For jupyter to recognize the kernal
+#   activate and then
+#   python -m ipykernel install --user --name py39 --display-name "py39"
+#
+#   For salishsea tools you also need (after activation)
+#   pip install --editable SalishSeaTools
+
+
+name: py39
+
+channels:
+  - conda-forge
+
+dependencies:
+  - arrow
+  - bottleneck
+  - cmocean
+  - f90nml
+  - gsw
+  - ipykernel
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - netCDF4
+  - numpy
+  - pandas
+  - pip
+  - progressbar
+  - python=3.9
+  - retrying
+  - scipy
+  - xarray
+  - pip:
+    - angles
+

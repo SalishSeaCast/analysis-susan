@@ -1,0 +1,38 @@
+# conda environment description file for my general py37
+# development environment
+#
+#
+#   $ conda env create -f py38_sqlAlchemy.yaml
+#   $ conda activate py38_sqpAlchemy
+#
+#   to add a package (when env is activated)
+#   1) add to list below
+#   $ conda env update -f py38_sqlAlchemy.yaml
+
+name: py38_sqlAlchemy
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - arrow
+  - bottleneck
+  - cliff
+  - cmocean
+  - gsw
+  - h5py
+  - ipython
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - pandas
+  - pip
+  - python=3.8
+  - pyyaml
+  - scipy
+  - sphinx
+  - sqlalchemy
+  - xarray
+  - pip:
