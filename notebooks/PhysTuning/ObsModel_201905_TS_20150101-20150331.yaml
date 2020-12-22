@@ -1,0 +1,31 @@
+# Yaml file to run comparison script
+
+PATH:
+  /results2/SalishSea/nowcast-green.201905
+
+start_date:
+  [2015, 1, 1]
+
+end_date:
+  [2015, 3, 31]
+
+filename:
+  ObsModel_201905_TS_20150101-20150331.csv
+
+flen:    # number of days per file
+  1
+
+filemap:
+  vosaline:
+     grid_T
+  votemper:
+     grid_T
+
+fdict:     # time resolution in hours
+  ptrc_T:
+    1
+  grid_T:
+    1
+
+namfmt:
+  nowcast       # nowcast for standard file, long for unsplit files
