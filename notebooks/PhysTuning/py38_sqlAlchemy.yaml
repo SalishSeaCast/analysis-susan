@@ -5,6 +5,10 @@
 #   $ conda env create -f py38_sqlAlchemy.yaml
 #   $ conda activate py38_sqpAlchemy
 #
+#   to add SalishSea_Tools
+#   $ cd MEOPAR/tools
+#   $ pip install --editable SalishSeaTools
+#
 #   to add a package (when env is activated)
 #   1) add to list below
 #   $ conda env update -f py38_sqlAlchemy.yaml
