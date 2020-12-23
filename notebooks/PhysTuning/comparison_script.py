@@ -38,11 +38,12 @@ def main(config_file):
                            config['end_date'][1],
                            config['end_date'][2])
 
-    df1 = et.loadDFOCTD(datelims=(start_date, end_date))
+    print (config['sqldir'])
+    df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
                         mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
-                        mod_flen=config['flen'])
+                        mod_flen=config['flen'], meshPath=config['meshPath'])
     data.to_csv(config['filename'])
 
 
