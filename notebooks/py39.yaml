@@ -26,6 +26,7 @@ dependencies:
   - arrow
   - bottleneck
   - cmocean
+  - dask
   - f90nml
   - gsw
   - ipykernel
