@@ -24,6 +24,7 @@ dependencies:
   - bottleneck
   - cliff
   - cmocean
+  - f90nml
   - gsw
   - h5py
   - ipython
@@ -33,10 +34,13 @@ dependencies:
   - numpy
   - pandas
   - pip
+  - progressbar
   - python=3.8
   - pyyaml
+  - retrying
   - scipy
   - sphinx
   - sqlalchemy
   - xarray
   - pip:
+    - angles
