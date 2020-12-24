@@ -25,7 +25,7 @@ import yaml
 from salishsea_tools import evaltools as et
 
 
-def main(config_file):
+def main(config_file, ctd_bot):
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
@@ -39,7 +39,14 @@ def main(config_file):
                            config['end_date'][2])
 
     print (config['sqldir'])
-    df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
+    if ctd_bot == 'ctd':
+        df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
+    elif ctd_bot == 'bot':
+        df1=et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
+                       excludeSaanich=True)
+    else:
+        print ('ERROR, specify ctd or bot as second argument')
+
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
                         mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
@@ -49,4 +56,5 @@ def main(config_file):
 
 if __name__ == "__main__":
     config_file = sys.argv[1]
-    main(config_file)
+    ctd_bot = sys.argv[2]
+    main(config_file, ctd_bot)
