@@ -29,3 +29,10 @@ fdict:     # time resolution in hours
 
 namfmt:
   nowcast       # nowcast for standard file, long for unsplit files
+
+sqldir:
+  /ocean/shared/SalishSeaCastData/DFO/BOT/
+
+meshPath:
+  /home/sallen/MEOPAR/grid/mesh_mask201702.nc
+
