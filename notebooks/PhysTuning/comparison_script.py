@@ -25,7 +25,7 @@ import yaml
 from salishsea_tools import evaltools as et
 
 
-def main(config_file, ctd_bot):
+def main(config_file, ctd_bot_psf):
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
@@ -39,13 +39,16 @@ def main(config_file, ctd_bot):
                            config['end_date'][2])
 
     print (config['sqldir'])
-    if ctd_bot == 'ctd':
+    if ctd_bot_psf == 'ctd':
         df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
-    elif ctd_bot == 'bot':
-        df1=et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
+    elif ctd_bot_psf == 'bot':
+        df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
+    elif ctd_bot_psf == 'psf':
+        df1 = pd.read_csv(basedir=config['sqldir'])
+        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
     else:
-        print ('ERROR, specify ctd or bot as second argument')
+        print ('ERROR, specify ctd, bot or psf as second argument')
 
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
