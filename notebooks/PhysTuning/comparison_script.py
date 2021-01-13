@@ -18,6 +18,7 @@ plotting and visualization.
 """
 
 import datetime as dt
+import pandas as pd
 from pathlib import Path
 import sys
 import yaml
@@ -45,7 +46,7 @@ def main(config_file, ctd_bot_psf):
         df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
     elif ctd_bot_psf == 'psf':
-        df1 = pd.read_csv(basedir=config['sqldir'])
+        df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
     else:
         print ('ERROR, specify ctd, bot or psf as second argument')
