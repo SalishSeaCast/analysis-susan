@@ -26,7 +26,7 @@ import yaml
 from salishsea_tools import evaltools as et
 
 
-def main(config_file, ctd_bot_psf):
+def main(config_file, ctd_bot_psf_pug_pugts):
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
@@ -40,16 +40,22 @@ def main(config_file, ctd_bot_psf):
                            config['end_date'][2])
 
     print (config['sqldir'])
-    if ctd_bot_psf == 'ctd':
+    if ctd_bot_psf_pug_pugts == 'ctd':
         df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
-    elif ctd_bot_psf == 'bot':
+    elif ctd_bot_psf_pug_pugts == 'bot':
         df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
-    elif ctd_bot_psf == 'psf':
+    elif ctd_bot_psf_pug_pugts == 'psf':
         df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+    elif ctd_bot_psf_pug_pugts == 'pug':
+        df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv')
+        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+    elif ctd_bot_psf_pug_pugts == 'pugts':
+        df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv')
+        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
     else:
-        print ('ERROR, specify ctd, bot or psf as second argument')
+        print ('ERROR, specify ctd, bot,  psf, pug, pugts as second argument')
 
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
@@ -60,5 +66,5 @@ def main(config_file, ctd_bot_psf):
 
 if __name__ == "__main__":
     config_file = sys.argv[1]
-    ctd_bot = sys.argv[2]
-    main(config_file, ctd_bot)
+    ctd_bot_psf_pug_pugts = sys.argv[2]
+    main(config_file, ctd_bot_psf_pug_pugts)
