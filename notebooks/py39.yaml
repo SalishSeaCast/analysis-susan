@@ -27,6 +27,7 @@ dependencies:
   - bottleneck
   - cmocean
   - dask
+  - erddapy
   - f90nml
   - gsw
   - ipykernel
