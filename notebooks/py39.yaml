@@ -42,6 +42,8 @@ dependencies:
   - python=3.9
   - retrying
   - scipy
+  - shapely
+  - statsmodels
   - xarray
   - pip:
     - angles
