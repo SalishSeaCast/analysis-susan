@@ -31,18 +31,23 @@ import yaml
 from salishsea_tools import evaltools as et
 
 
-def main(config_file):
+def main(config_file, year, month):
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
 
-    start_date = dt.datetime(config['start_date'][0],
-                             config['start_date'][1],
-                             config['start_date'][2])
+    start_date = dt.datetime(int(year),
+                             int(month),
+                             2)
+    if month == '12':
+        end_date = dt.datetime(int(year) + 1,
+                               1, 1)
+    else:
+        end_date = dt.datetime(int(year),
+                           int(month) + 1,
+                           1)
 
-    end_date = dt.datetime(config['end_date'][0],
-                           config['end_date'][1],
-                           config['end_date'][2])
+    print(f'{config["filename"]}_{year}{month}_{year}{month}.csv')
 
     dbname = config['sqlfile']
     engine = create_engine('sqlite:///' + dbname)
@@ -80,13 +85,16 @@ def main(config_file):
     data=et.matchData(df, filemap=config['filemap'], fdict=config['fdict'],
                       mod_start=start_date, mod_end=end_date,
                       mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
-                      mod_flen=config['flen'], method='ferry', preIndexed=True)
+                      mod_flen=config['flen'], meshPath=config['meshPath'],
+                      method='ferry', preIndexed=True)
 
-    data.to_csv(config['filename'])
+    data.to_csv(f'{config["filename"]}_{year}{month}_{year}{month}.csv')
 
     session.close()
     engine.dispose()
 
 if __name__ == "__main__":
     config_file = sys.argv[1]
-    main(config_file)
+    year = sys.argv[2]
+    month = sys.argv[3]
+    main(config_file, year, month)
