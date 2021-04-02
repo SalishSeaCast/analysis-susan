@@ -26,7 +26,7 @@ import yaml
 from salishsea_tools import evaltools as et
 
 
-def main(config_file, ctd_bot_psf_pug_pugts):
+def main(config_file, obs_data_code):
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
@@ -40,31 +40,39 @@ def main(config_file, ctd_bot_psf_pug_pugts):
                            config['end_date'][2])
 
     print (config['sqldir'])
-    if ctd_bot_psf_pug_pugts == 'ctd':
+    preindexed = False
+    if obs_data_code == 'ctd':
         df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
-    elif ctd_bot_psf_pug_pugts == 'bot':
+    elif obs_data_code == 'bot':
         df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
-    elif ctd_bot_psf_pug_pugts == 'psf':
+    elif obs_data_code == 'psf':
         df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
-    elif ctd_bot_psf_pug_pugts == 'pug':
+    elif obs_data_code == 'pug':
         df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
-    elif ctd_bot_psf_pug_pugts == 'pugts':
+    elif obs_data_code == 'pugts':
         df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+    elif obs_data_code == 'hplc':
+        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv')
+        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+        preindexed = True
     else:
-        print ('ERROR, specify ctd, bot,  psf, pug, pugts as second argument')
+        print ('ERROR, specify ctd, bot,  psf, pug, pugts, hplc as second argument')
 
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
                         mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
-                        mod_flen=config['flen'], meshPath=config['meshPath'])
-    data.to_csv(config['filename'])
+                        mod_flen=config['flen'], meshPath=config['meshPath'], 
+                        preIndexed=preindexed, fastSearch=True)
+    filename = f'ObsModel_{config["filebase"]}_{obs_data_code}_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
+    print(filename)
+    data.to_csv(filename)
 
 
 if __name__ == "__main__":
     config_file = sys.argv[1]
-    ctd_bot_psf_pug_pugts = sys.argv[2]
-    main(config_file, ctd_bot_psf_pug_pugts)
+    obs_data_code = sys.argv[2]
+    main(config_file, obs_data_code)
