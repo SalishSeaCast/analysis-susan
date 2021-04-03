@@ -25,6 +25,7 @@ dependencies:
   - cliff
   - cmocean
   - dask
+  - erddapy
   - f90nml
   - gsw
   - h5py
