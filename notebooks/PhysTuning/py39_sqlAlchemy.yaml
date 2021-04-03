@@ -1,0 +1,49 @@
+# conda environment description file for sqlalchemy 3.9
+# development environment
+#
+#
+#   $ conda env create -f py39_sqlAlchemy.yaml
+#   $ conda activate py39_sqlAlchemy
+#
+#   to add SalishSea_Tools
+#   $ cd MEOPAR/tools
+#   $ pip install --editable SalishSeaTools
+#
+#   to add a package (when env is activated)
+#   1) add to list below
+#   $ conda env update -f py39_sqlAlchemy.yaml
+
+name: py39_sqlAlchemy
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - arrow
+  - bottleneck
+  - cliff
+  - cmocean
+  - dask
+  - erddapy
+  - f90nml
+  - gsw
+  - h5py
+  - ipython
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - netCDF4
+  - numpy
+  - pandas
+  - pip
+  - progressbar
+  - python=3.9
+  - pyyaml
+  - retrying
+  - scipy
+  - sphinx
+  - sqlalchemy
+  - xarray
+  - pip:
+    - angles
