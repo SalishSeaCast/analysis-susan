@@ -41,6 +41,7 @@ def main(config_file, obs_data_code):
 
     print (config['sqldir'])
     preindexed = False
+    method = 'bin'
     if obs_data_code == 'ctd':
         df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
     elif obs_data_code == 'bot':
@@ -59,14 +60,18 @@ def main(config_file, obs_data_code):
         df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv')
         df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
         preindexed = True
+    elif obs_data_code == 'ferry':
+        df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
+        preindexed = True
+        method = 'ferry'
     else:
-        print ('ERROR, specify ctd, bot,  psf, pug, pugts, hplc as second argument')
+        print ('ERROR, specify ctd, bot,  psf, pug, pugts, hplc, ferry, as second argument')
 
     data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
                         mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
                         mod_flen=config['flen'], meshPath=config['meshPath'], 
-                        preIndexed=preindexed, fastSearch=True)
+                        preIndexed=preindexed, fastSearch=True, method=method)
     filename = f'ObsModel_{config["filebase"]}_{obs_data_code}_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
     print(filename)
     data.to_csv(filename)
