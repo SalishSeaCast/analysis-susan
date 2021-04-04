@@ -1,0 +1,50 @@
+# Yaml file for 202007F series of comparison script runs
+
+PATH:
+  /scratch/sallen/dlatorne/hindcast_202007_asselin/202007F
+
+start_date:
+  [2015, 1, 1]
+
+end_date:
+  [2015, 12, 31]
+
+filebase:
+  202007F
+
+flen:    # number of days per file
+  1
+
+filemap:
+  nitrate:
+     ptrc_T
+  silicon:
+     ptrc_T
+  ammonium:
+     ptrc_T
+  diatoms:
+     ptrc_T
+  ciliates:
+     ptrc_T
+  flagellates:
+     ptrc_T
+  vosaline:
+     grid_T
+  votemper:
+     grid_T
+
+fdict:     # time resolution in hours
+  ptrc_T:
+    1
+  grid_T:
+    1
+
+namfmt:
+  optimum
+
+sqldir:
+  /home/sallen/sallen/MEOPAR/OBS/
+
+meshPath:
+  /home/sallen/sallen/MEOPAR/grid/mesh_mask201702.nc
+
