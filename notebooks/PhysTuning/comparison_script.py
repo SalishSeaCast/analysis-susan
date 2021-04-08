@@ -47,24 +47,19 @@ def main(config_file, obs_data_code):
         df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
     elif obs_data_code == 'psf':
-        df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv')
-        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+        df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'pug':
-        df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv')
-        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+        df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'pugts':
-        df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv')
-        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+        df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'hplc':
-        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv')
-        df1['dtUTC'] = [dt.datetime.strptime(ii, '%Y-%m-%d %H:%M:%S') for ii in df1['dtUTC']]
+        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv', parse_dates-['dtUTC'])
         preindexed = True
-    elif obs_data_code == 'ferry' or 'ferry_file_only':
+    elif obs_data_code == 'ferry' or obs_data_code == 'ferry_file_only':
         df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
     elif obs_data_code == 'ferry_from_file':
-        df1 = pd.read_csv(f'./ferry_{start_date:%Y}.csv')
+        df1 = pd.read_csv(f'./ferry_{start_date:%Y}.csv', parse_dates=['dtUTC'])
         obs_data_code = 'ferry'
-        print (obs_data_code, 'code')
     else:
         print ('ERROR, specify ctd, bot,  psf, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only as second argument')
 
