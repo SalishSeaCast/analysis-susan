@@ -25,6 +25,7 @@ channels:
 dependencies:
   - arrow
   - bottleneck
+  - cartopy
   - cmocean
   - dask
   - erddapy
