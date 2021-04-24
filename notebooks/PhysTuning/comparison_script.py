@@ -25,19 +25,24 @@ import yaml
 
 from salishsea_tools import evaltools as et
 
+monthday = {'all': [1, 1, 12, 31],
+            '1': [1, 1, 2, 31],
+            '2': [3, 1, 6, 30],
+            '3': [6, 1, 9, 30],
+            '4': [9, 1, 12, 31]}
 
-def main(config_file, obs_data_code):
+
+def main(config_file, obs_data_code, year, quarter):
+
+    start_date = dt.datetime(year, monthday[quarter][0],
+                             monthday[quarter][1])
+    end_date = dt.datetime(year, monthday[quarter][2],
+                           monthday[quarter][3])
+
+    print (start_date, end_date)
 
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
-
-    start_date = dt.datetime(config['start_date'][0],
-                             config['start_date'][1],
-                             config['start_date'][2])
-
-    end_date = dt.datetime(config['end_date'][0],
-                           config['end_date'][1],
-                           config['end_date'][2])
 
     print (config['sqldir'])
     preindexed = False
@@ -48,6 +53,9 @@ def main(config_file, obs_data_code):
                        excludeSaanich=True)
     elif obs_data_code == 'psf':
         df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv', parse_dates=['dtUTC'])
+    elif obs_data_code == 'psfts':
+        df1 = pd.read_csv(f'{config["sqldir"]}/PSFCTD.csv', parse_dates=['dtUTC'], low_memory=False)
+        preindexed = True
     elif obs_data_code == 'pug':
         df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'pugts':
@@ -61,7 +69,7 @@ def main(config_file, obs_data_code):
         df1 = pd.read_csv(f'./ferry_{start_date:%Y}.csv', parse_dates=['dtUTC'])
         obs_data_code = 'ferry'
     else:
-        print ('ERROR, specify ctd, bot,  psf, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only as second argument')
+        print ('ERROR, specify ctd, bot,  psf, psfts, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only as second argument')
 
     if obs_data_code == 'ferry_file_only':
         df1.to_csv(f'./ferry_{start_date:%Y}.csv')
@@ -86,4 +94,7 @@ def main(config_file, obs_data_code):
 if __name__ == "__main__":
     config_file = sys.argv[1]
     obs_data_code = sys.argv[2]
-    main(config_file, obs_data_code)
+    print(sys.argv)
+    year = sys.argv[3]
+    quarter = sys.argv[4]
+    main(config_file, obs_data_code, int(year), quarter)

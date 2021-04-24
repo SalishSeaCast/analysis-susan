@@ -3,12 +3,6 @@
 PATH:
   /scratch/sallen/dlatorne/hindcast_202007_asselin/202007F
 
-start_date:
-  [2015, 1, 1]
-
-end_date:
-  [2015, 12, 31]
-
 filebase:
   202007F
 
