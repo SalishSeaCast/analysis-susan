@@ -26,7 +26,7 @@ import yaml
 from salishsea_tools import evaltools as et
 
 monthday = {'all': [1, 1, 12, 31],
-            '1': [1, 1, 2, 31],
+            '1': [1, 1, 3, 31],
             '2': [3, 1, 6, 30],
             '3': [6, 1, 9, 30],
             '4': [9, 1, 12, 31]}
@@ -61,15 +61,18 @@ def main(config_file, obs_data_code, year, quarter):
     elif obs_data_code == 'pugts':
         df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'hplc':
-        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv', parse_dates-['dtUTC'])
+        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv', parse_dates=['dtUTC'])
         preindexed = True
     elif obs_data_code == 'ferry' or obs_data_code == 'ferry_file_only':
         df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
     elif obs_data_code == 'ferry_from_file':
         df1 = pd.read_csv(f'./ferry_{start_date:%Y}.csv', parse_dates=['dtUTC'])
         obs_data_code = 'ferry'
+    elif obs_data_code == 'onc':
+        df1 = et.load_ONC_node_ERDDAP(datelims=(start_date, end_date))
+        preindexed = True
     else:
-        print ('ERROR, specify ctd, bot,  psf, psfts, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only as second argument')
+        print ('ERROR, specify ctd, bot,  psf, psfts, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only, onc as second argument')
 
     if obs_data_code == 'ferry_file_only':
         df1.to_csv(f'./ferry_{start_date:%Y}.csv')
