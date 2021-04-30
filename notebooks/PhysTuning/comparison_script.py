@@ -44,24 +44,24 @@ def main(config_file, obs_data_code, year, quarter):
     with Path(config_file).open("rt") as f:
         config = yaml.safe_load(f)
 
-    print (config['sqldir'])
+    print (obs_data_code, year, quarter)
     preindexed = False
     if obs_data_code == 'ctd':
-        df1 = et.loadDFOCTD(basedir=config['sqldir'], datelims=(start_date, end_date))
+        df1 = et.loadDFOCTD(config['ctddir'], datelims=(start_date, end_date))
     elif obs_data_code == 'bot':
-        df1 = et.loadDFO(basedir=config['sqldir'], datelims=(start_date, end_date),
+        df1 = et.loadDFO(basedir=config['botdir'], datelims=(start_date, end_date),
                        excludeSaanich=True)
     elif obs_data_code == 'psf':
-        df1 = pd.read_csv(f'{config["sqldir"]}/PSFBotChl.csv', parse_dates=['dtUTC'])
+        df1 = pd.read_csv(f'{config["csvdir"]}/PSFBotChl.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'psfts':
-        df1 = pd.read_csv(f'{config["sqldir"]}/PSFCTD.csv', parse_dates=['dtUTC'], low_memory=False)
+        df1 = pd.read_csv(f'{config["csvdir"]}/PSFCTD.csv', parse_dates=['dtUTC'], low_memory=False)
         preindexed = True
     elif obs_data_code == 'pug':
-        df1 = pd.read_csv(f'{config["sqldir"]}/WADENuts.csv', parse_dates=['dtUTC'])
+        df1 = pd.read_csv(f'{config["csvdir"]}/WADENuts.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'pugts':
-        df1 = pd.read_csv(f'{config["sqldir"]}/WADECTD.csv', parse_dates=['dtUTC'])
+        df1 = pd.read_csv(f'{config["csvdir"]}/WADECTD.csv', parse_dates=['dtUTC'])
     elif obs_data_code == 'hplc':
-        df1 = pd.read_csv(f'{config["sqldir"]}/HPLCPhyto.csv', parse_dates=['dtUTC'])
+        df1 = pd.read_csv(f'{config["csvdir"]}/HPLCPhyto.csv', parse_dates=['dtUTC'])
         preindexed = True
     elif obs_data_code == 'ferry' or obs_data_code == 'ferry_file_only':
         df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
