@@ -66,7 +66,7 @@ def main(config_file, obs_data_code, year, quarter):
     elif obs_data_code == 'ferry' or obs_data_code == 'ferry_file_only':
         df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
     elif obs_data_code == 'ferry_from_file':
-        df1 = pd.read_csv(f'./ferry_{start_date:%Y}.csv', parse_dates=['dtUTC'])
+        df1 = pd.read_csv(f'{config["outdir"]}/ferry_{start_date:%Y}.csv', parse_dates=['dtUTC'])
         obs_data_code = 'ferry'
     elif obs_data_code == 'onc':
         df1 = et.load_ONC_node_ERDDAP(datelims=(start_date, end_date))
@@ -75,15 +75,15 @@ def main(config_file, obs_data_code, year, quarter):
         print ('ERROR, specify ctd, bot,  psf, psfts, pug, pugts, hplc, ferry, ferry_from_file, ferry_file_only, onc as second argument')
 
     if obs_data_code == 'ferry_file_only':
-        df1.to_csv(f'./ferry_{start_date:%Y}.csv')
+        df1.to_csv(f'{config["outdir"]}/ferry_{start_date:%Y}.csv')
     else:
         if 'ferry' in obs_data_code:
             preindexed = True
             method = 'ferry'
-            filename = f'ObsModel_{config["filebase"]}_ferry_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
+            filename = f'{config["outdir"]}/ObsModel_{config["filebase"]}_ferry_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
         else:
             method = 'bin'
-            filename = f'ObsModel_{config["filebase"]}_{obs_data_code}_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
+            filename = f'{config["outdir"]}/ObsModel_{config["filebase"]}_{obs_data_code}_{start_date:%Y%m%d}_{end_date:%Y%m%d}.csv'
         data = et.matchData(data=df1, filemap=config['filemap'], fdict=config['fdict'],
                         mod_start=start_date, mod_end=end_date,
                         mod_nam_fmt=config['namfmt'], mod_basedir=config['PATH'],
