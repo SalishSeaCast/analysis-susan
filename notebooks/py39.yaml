@@ -27,6 +27,7 @@ dependencies:
   - bottleneck
   - cartopy
   - cmocean
+  - colorcet
   - dask
   - erddapy
   - f90nml
@@ -37,6 +38,7 @@ dependencies:
   - matplotlib
   - netCDF4
   - numpy
+  - openpyxl
   - pandas
   - pip
   - progressbar
