@@ -31,6 +31,7 @@ dependencies:
   - dask
   - erddapy
   - f90nml
+  - geopandas
   - gsw
   - ipykernel
   - jupyter
