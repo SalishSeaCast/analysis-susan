@@ -27,9 +27,9 @@ from salishsea_tools import evaltools as et
 
 monthday = {'all': [1, 1, 12, 31],
             '1': [1, 1, 3, 31],
-            '2': [3, 1, 6, 30],
-            '3': [6, 1, 9, 30],
-            '4': [9, 1, 12, 31]}
+            '2': [4, 1, 6, 30],
+            '3': [7, 1, 9, 30],
+            '4': [10, 1, 12, 31]}
 
 
 def main(config_file, obs_data_code, year, quarter):
