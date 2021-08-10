@@ -10,18 +10,6 @@ flen:    # number of days per file
   1
 
 filemap:
-  nitrate:
-     ptrc_T
-  silicon:
-     ptrc_T
-  ammonium:
-     ptrc_T
-  diatoms:
-     ptrc_T
-  ciliates:
-     ptrc_T
-  flagellates:
-     ptrc_T
   vosaline:
      grid_T
   votemper:

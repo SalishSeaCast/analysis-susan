@@ -1,23 +1,4 @@
-python -m comparison_script ObsModel_202007D-nociliates.yaml ctd 2015 all 
-python -m comparison_script ObsModel_202007D-nociliates.yaml ctd 2016 all 
-python -m comparison_script ObsModel_202007D-nociliates.yaml ctd 2016 all 
-python -m comparison_script ObsModel_202007D-nociliates.yaml bot 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml bot 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml psfts 2015 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml psfts 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml psfts 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml psf 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml psf 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pugts 2015 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pugts 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pugts 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pug 2015 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pug 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml pug 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml hplc 2015 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml hplc 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml hplc 2017 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml ferry 2015 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml ferry 2016 all
-python -m comparison_script ObsModel_202007D-nociliates.yaml ferry 2017 all
+#python -m comparison_script ObsModel_202007F.yaml onc 2015 all
+#python -m comparison_script ObsModel_202007F.yaml onc 2016 all
+python -m comparison_script ObsModel_202007F.yaml onc 2017 all
 
