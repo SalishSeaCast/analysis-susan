@@ -1,22 +1,18 @@
-# Yaml file for 202007F series of comparison script runs
+# Yaml file for 202111 series of comparison script runs
 
 PATH:
-  /scratch/sallen/dlatorne/hindcast_202007_asselin/202007F
+  /scratch/sallen/dlatorne/v202111
 
 filebase:
-  202007F0f
+  202111
 
 outdir:
-  /scratch/sallen/sallen/202007/
+  /scratch/sallen/sallen/202111/
 
 flen:    # number of days per file
   1
 
 filemap:
-  vosaline:
-     grid_T
-  votemper:
-     grid_T
   nitrate:
      ptrc_T
   silicon:
@@ -29,6 +25,10 @@ filemap:
      ptrc_T
   flagellates:
      ptrc_T
+  vosaline:
+     grid_T
+  votemper:
+     grid_T
   dissolved_oxygen:
      carp_T
 
@@ -56,5 +56,5 @@ sqldir:
   /home/sallen/sallen/MEOPAR/OBS/
 
 meshPath:
-  /home/sallen/sallen/MEOPAR/grid/mesh_mask201702.nc
+  /home/sallen/sallen/MEOPAR/grid/mesh_mask202108.nc
 
