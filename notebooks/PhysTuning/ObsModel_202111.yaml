@@ -1,60 +1,58 @@
 # Yaml file for 202111 series of comparison script runs
 
 PATH:
-  /scratch/sallen/dlatorne/v202111
+  /results2/SalishSea/nowcast-green.202111
 
 filebase:
   202111
 
 outdir:
-  /scratch/sallen/sallen/202111/
+  /data/sallen/results/MEOPAR/202111/ObsModel/
 
 flen:    # number of days per file
   1
 
 filemap:
   nitrate:
-     ptrc_T
+     biol_T
   silicon:
-     ptrc_T
+     biol_T
   ammonium:
-     ptrc_T
+     biol_T
   diatoms:
-     ptrc_T
-  ciliates:
-     ptrc_T
+     biol_T
   flagellates:
-     ptrc_T
+     biol_T
   vosaline:
      grid_T
   votemper:
      grid_T
   dissolved_oxygen:
-     carp_T
+     chem_T
 
 fdict:     # time resolution in hours
-  ptrc_T:
+  biol_T:
     1
   grid_T:
     1
-  carp_T:
+  chem_T:
     1
 
 namfmt:
-  optimum
+  nowcast
 
 csvdir:
-  /home/sallen/sallen/MEOPAR/OBS/
+  /data/eolson/results/MEOPAR/oldDBs/
 
 ctddir:
-  /home/sallen/sallen/MEOPAR/OBS/
+  /ocean/shared/SalishSeaCastData/DFO/CTD/
 
 botdir:
-  /home/sallen/sallen/MEOPAR/OBS/
+  /ocean/shared/SalishSeaCastData/DFO/BOT/
 
 sqldir:
-  /home/sallen/sallen/MEOPAR/OBS/
+  /ocean/shared/SalishSeaCastData/DFO/BOT/
 
 meshPath:
-  /home/sallen/sallen/MEOPAR/grid/mesh_mask202108.nc
+  /home/sallen/MEOPAR/grid/mesh_mask202108.nc
 
