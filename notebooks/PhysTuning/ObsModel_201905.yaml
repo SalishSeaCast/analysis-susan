@@ -23,6 +23,8 @@ filemap:
      ptrc_T
   flagellates:
      ptrc_T
+  dissolved_oxygen:
+     carp_T
   vosaline:
      grid_T
   votemper:
@@ -32,6 +34,8 @@ fdict:     # time resolution in hours
   ptrc_T:
     1
   grid_T:
+    1
+  carp_T:
     1
 
 namfmt:
