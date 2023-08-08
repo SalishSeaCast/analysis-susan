@@ -29,7 +29,8 @@ monthday = {'all': [1, 1, 12, 31],
             '1': [1, 1, 3, 31],
             '2': [4, 1, 6, 30],
             '3': [7, 1, 9, 30],
-            '4': [10, 1, 12, 31]}
+            '4': [10, 1, 12, 31],
+            'Cassidy': [1, 1, 8, 5]}
 
 
 def main(config_file, obs_data_code, year, quarter):
@@ -63,6 +64,10 @@ def main(config_file, obs_data_code, year, quarter):
     elif obs_data_code == 'hplc':
         df1 = pd.read_csv(f'{config["csvdir"]}/HPLCPhyto.csv', parse_dates=['dtUTC'])
         preindexed = True
+    elif obs_data_code == 'CIOOS':
+        df1 = pd.read_csv(f'{config["CIOOSdir"]}/{config["filename"]}', skiprows=[1], parse_dates=['time'])
+        df1 = df1.rename(columns={"latitude": "Lat", "longitude": "Lon", "time": "dtUTC", "depth": "Z"})
+        df1['dtUTC'] = df1['dtUTC'].dt.tz_localize(None)
     elif obs_data_code == 'ferry' or obs_data_code == 'ferry_file_only':
         df1 = et.load_ferry_ERDDAP(datelims=(start_date, end_date))
     elif obs_data_code == 'ferry_from_file':

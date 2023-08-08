@@ -1,0 +1,63 @@
+# Yaml file for 202111 series of comparison script runs
+
+PATH:
+  /results2/SalishSea/nowcast-green.202111
+
+filebase:
+  202111
+
+outdir:
+  /data/sallen/results/MEOPAR/202111/ObsModel/
+
+flen:    # number of days per file
+  1
+
+filemap:
+  nitrate:
+     biol_T
+  silicon:
+     biol_T
+  ammonium:
+     biol_T
+  diatoms:
+     biol_T
+  flagellates:
+     biol_T
+  vosaline:
+     grid_T
+  votemper:
+     grid_T
+  dissolved_oxygen:
+     chem_T
+
+fdict:     # time resolution in hours
+  biol_T:
+    1
+  grid_T:
+    1
+  chem_T:
+    1
+
+namfmt:
+  nowcast
+
+csvdir:
+  /data/eolson/results/MEOPAR/oldDBs/
+
+ctddir:
+  /ocean/shared/SalishSeaCastData/DFO/CTD/
+
+botdir:
+  /ocean/shared/SalishSeaCastData/DFO/BOT/
+
+sqldir:
+  /ocean/shared/SalishSeaCastData/DFO/BOT/
+
+CIOOSdir:
+  /ocean/cdonaldson/MOAD/analysis-cassidy/notebooks/model_obs_eval/CIOOS
+
+meshPath:
+  /home/sallen/MEOPAR/grid/mesh_mask202108.nc
+
+filename:
+  HomathkoPoly_03_IOSRosetteBottle_08032023.csv
